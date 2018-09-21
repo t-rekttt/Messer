@@ -10,20 +10,41 @@ const log = require("./log")
  * Prompts the user for their username and password in the terminal
  */
 function promptCredentials() {
-  log("Enter your Facebook credentials - your password will not be visible as you type it in")
+  log('Choose credentials mode: \n1. Username & Password\n2. Access Token')
   prompt.start()
-
   return new Promise((resolve, reject) => {
-    prompt.get([{
-      name: "email",
-      required: true,
-    }, {
-      name: "password",
-      required: true,
-      hidden: true,
-    }], (err, result) => {
+    prompt.get(['mode'], (err, result) => {
       if (err) return reject(err)
-      return resolve(result)
+      resolve(result)
+    })
+  })
+  .then(mode => {
+    return new Promise((resolve, reject) => {
+      if (mode == '1') {
+        log("Enter your Facebook credentials - your password will not be visible as you type it in")
+
+        prompt.get([{
+          name: "email",
+          required: true,
+        }, {
+          name: "password",
+          required: true,
+          hidden: true,
+        }], (err, result) => {
+          if (err) return reject(err)
+          return resolve(result)
+        })
+      } else {
+        log("Enter your Access Token")
+
+        prompt.get([{
+          name: 'access_token',
+          required: true
+        }], (err, result) => {
+          if (err) return reject(err)
+          return resolve(result)
+        })
+      }
     })
   })
 }

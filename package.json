@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "facebook-chat-api": "github:Schmavery/facebook-chat-api",
+    "facebook-chat-api": "github:t-rekttt/facebook-chat-api",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "prompt": "^1.0.0"
